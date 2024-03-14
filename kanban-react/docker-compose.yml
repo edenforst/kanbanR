@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+
+  express:
+    image: bitnami/express:latest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+
+  nodejs:
+    image: dockette/nodejs:latest
+    volumes:
+      - ./app:/app
+    working_dir: /app
+    command: npm start
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
