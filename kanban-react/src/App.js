@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LoginForm from './components/pages/Login';
 import RegisterForm from './components/pages/Register';
 import CardForm from './components/Board/BoardCard';
 import BoardForm from './components/Board/Board';
 import DragAndDrop from './components/pages/Home';
+import { createBoard, getAllBoards, getBoardById, updateBoard, deleteBoard } from './components/api/boardApi';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [boards, setBoards] = useState([]);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
@@ -15,6 +17,15 @@ function App() {
   const handleLogout = () => {
     setIsLoggedIn(false);
   };
+
+  useEffect(() => {
+    const fetchBoards = async () => {
+      const response = await getAllBoards();
+      setBoards(response.data);
+    };
+
+    fetchBoards();
+  }, []);
 
   return (
     <div>
@@ -27,11 +38,11 @@ function App() {
         </div>
       )}
 
-      {isLoggedIn && (
+      {isLoggedIn && boards.length > 0 && (
         <div>
           <button onClick={handleLogout}>Déconnexion</button>
           <h2>Projet</h2>
-          <DragAndDrop />
+          <DragAndDrop boards={boards} />
           <CardForm />
           <BoardForm />
         </div>

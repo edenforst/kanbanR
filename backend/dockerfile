@@ -13,8 +13,8 @@ RUN npm install
 # Copier le reste des fichiers
 COPY . .
 
-# Exposer le port sur lequel l'application React écoute
-EXPOSE 3000
+# Exposer le port sur lequel l'application Express écoute
+EXPOSE 3001
 
 # Commande pour démarrer l'application
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]

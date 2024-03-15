@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-const items = ['Item 1', 'Item 2', 'Item 3'];
-
 const DragAndDrop = () => {
+  const [items, setItems] = useState(['Item 1', 'Item 2', 'Item 3']);
+
   const handleDragEnd = (result) => {
     if (!result.destination) return;
 
@@ -11,7 +11,7 @@ const DragAndDrop = () => {
     const [removed] = newItems.splice(result.source.index, 1);
     newItems.splice(result.destination.index, 0, removed);
 
-    console.log('Nouvelle liste des éléments :', newItems);
+    setItems(newItems);
   };
 
   return (
