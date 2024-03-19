@@ -4,6 +4,7 @@ import RegisterForm from './components/pages/Register';
 import CardForm from './components/Board/BoardCard';
 import BoardForm from './components/Board/Board';
 import DragAndDrop from './components/pages/Home';
+import Home from './components/pages/Home';
 import { createBoard, getAllBoards, getBoardById, updateBoard, deleteBoard } from './components/api/boardApi';
 
 function App() {
@@ -21,12 +22,14 @@ function App() {
   useEffect(() => {
     const fetchBoards = async () => {
       const response = await getAllBoards();
-      setBoards(response.data);
+      setBoards(response);
     };
-
+  
     fetchBoards();
   }, []);
 
+  
+  
   return (
     <div>
       <h1>Kanban</h1>
@@ -42,7 +45,7 @@ function App() {
         <div>
           <button onClick={handleLogout}>Déconnexion</button>
           <h2>Projet</h2>
-          <DragAndDrop boards={boards} />
+          <Home />
           <CardForm />
           <BoardForm />
         </div>

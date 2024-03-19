@@ -16,9 +16,12 @@ const createBoard = async (boardData) => {
 // Récupérer tous les tableaux
 const getAllBoards = async () => {
   const response = await fetch(API_URL);
+  console.log(response); // Ajouter cette ligne pour afficher la réponse brute dans la console
   const data = await response.json();
   return data;
 };
+
+
 
 // Récupérer un tableau par son ID
 const getBoardById = async (boardId) => {

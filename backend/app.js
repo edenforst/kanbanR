@@ -32,7 +32,7 @@ app.use(express.static('frontend/public'));
 // connect db then start server
 (async () => {
 try {
-    await mongoose.connect('mongodb://localhost:27017/Kanban');
+    await mongoose.connect('mongodb://localhost:27017/Kanban'); //changer en 'mongodb://mongo:27018/Kanban' pour docker
     app.listen(port, () => console.log(`App started at: http://localhost:${port}`));
     console.log(`Connecté a MongoDB`);
 } catch(error) {
